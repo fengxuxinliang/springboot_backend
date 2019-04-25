@@ -87,6 +87,13 @@ public class SeePersonTest {
         Assert.assertEquals(1,seePersonDao.countSum());
     }
 
+    /**
+    * 方法实现说明
+    * @author      xxl
+    * @return      
+    * @exception   SeePersonTest.java
+    * @date        2019/4/25 18:37
+    */
     @Test
     public void updatePerson(){
         SeePerson seePerson=seePersonDao.getById(2);
