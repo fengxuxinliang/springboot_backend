@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zw.admin.server.dao.SeePersonDao">
+
+	<sql id="where">
+		<where>
+			<if test="params.dealDep != null and params.dealDep != ''">
+				and deal_dep = #{params.dealDep} 
+			</if>
+			<if test="params.dealEmail != null and params.dealEmail != ''">
+				and deal_email = #{params.dealEmail} 
+			</if>
+			<if test="params.dealId != null and params.dealId != ''">
+				and deal_id = #{params.dealId} 
+			</if>
+			<if test="params.dealName != null and params.dealName != ''">
+				and deal_name = #{params.dealName} 
+			</if>
+			<if test="params.dealNote != null and params.dealNote != ''">
+				and deal_note = #{params.dealNote} 
+			</if>
+			<if test="params.dealNumber != null and params.dealNumber != ''">
+				and deal_number = #{params.dealNumber} 
+			</if>
+			<if test="params.dealedDep != null and params.dealedDep != ''">
+				and dealed_dep = #{params.dealedDep} 
+			</if>
+			<if test="params.dealedEmail != null and params.dealedEmail != ''">
+				and dealed_email = #{params.dealedEmail} 
+			</if>
+			<if test="params.dealedName != null and params.dealedName != ''">
+				and dealed_name = #{params.dealedName} 
+			</if>
+			<if test="params.dealedNumber != null and params.dealedNumber != ''">
+				and dealed_number = #{params.dealedNumber} 
+			</if>
+			<if test="params.rectifictId != null and params.rectifictId != ''">
+				and rectifict_id = #{params.rectifictId} 
+			</if>
+		
+		</where>
+	</sql>
+
+	<sql id="bean">
+			<if test="dealDep != null and dealDep != ''">
+				 deal_dep = #{dealDep},
+			</if>
+			<if test="dealEmail != null and dealEmail != ''">
+				deal_email = #{dealEmail},
+			</if>
+			<if test="dealName != null and dealName != ''">
+				 deal_name = #{dealName},
+			</if>
+			<if test="dealNote != null and dealNote != ''">
+				 deal_note = #{dealNote},
+			</if>
+			<if test="dealNumber != null and dealNumber != ''">
+				 deal_number = #{dealNumber},
+			</if>
+			<if test="dealedDep != null and dealedDep != ''">
+				 dealed_dep = #{dealedDep},
+			</if>
+			<if test="dealedEmail != null and dealedEmail != ''">
+				 dealed_email = #{dealedEmail},
+			</if>
+			<if test="dealedName != null and dealedName != ''">
+				 dealed_name = #{dealedName},
+			</if>
+			<if test="dealedNumber != null and dealedNumber != ''">
+				 dealed_number = #{dealedNumber},
+			</if>
+			<if test="rectifictId != null and rectifictId != ''">
+				 rectifict_id = #{rectifictId},
+			</if>
+	</sql>
+
+	<select id="getById" resultType="SeePerson">
+		select * from see_person
+		where deal_id=#{id}
+	</select>
+
+	<select id="count" resultType="int">
+		select count(1) from see_person t
+		<include refid="where" />
+	</select>
+
+	<select id="countSum" resultType="int">
+		select count(1) from see_person
+	</select>
+
+	<select id="list" resultType="SeePerson">
+		select * from see_person t
+		<include refid="where" />
+		limit #{offset}, #{limit}
+	</select>
+
+
+	<update id="update" parameterType="com.zw.admin.server.model.SeePerson">
+		update see_person t
+		<set>
+			<include refid="bean"></include>
+		</set>
+		where deal_id = #{dealId}
+	</update>
+
+	<delete id="delete">
+		delete from see_person
+		where deal_id=#{id}
+	</delete>
+
+	<insert id="save" parameterType="SeePerson">
+		insert into see_person
+		(deal_dep, deal_email, deal_id, deal_name, deal_note, deal_number, dealed_dep, dealed_email, dealed_name, dealed_number, rectifict_id)
+		values(#{dealDep}, #{dealEmail}, #{dealId}, #{dealName}, #{dealNote}, #{dealNumber}, #{dealedDep}, #{dealedEmail}, #{dealedName}, #{dealedNumber}, #{rectifictId})
+	</insert>
+
+	<delete id="truncate">
+		delete from see_person
+	</delete>
+
+
+</mapper>

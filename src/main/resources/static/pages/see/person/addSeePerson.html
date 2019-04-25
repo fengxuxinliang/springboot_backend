@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<form class="form-horizontal" onsubmit="return false" id="form">
+		<fieldset>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>dealDep</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='dealDep' type='text' name='dealDep' id='dealDep' data-bv-notempty='true' data-bv-notempty-message='dealDep 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>dealEmail</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='dealEmail' type='text' name='dealEmail' id='dealEmail' data-bv-notempty='true' data-bv-notempty-message='dealEmail 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>dealId</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='dealId' type='text' name='dealId' id='dealId' data-bv-notempty='true' data-bv-notempty-message='dealId 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>dealName</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='dealName' type='text' name='dealName' id='dealName' data-bv-notempty='true' data-bv-notempty-message='dealName 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>dealNote</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='dealNote' type='text' name='dealNote' id='dealNote' data-bv-notempty='true' data-bv-notempty-message='dealNote 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>dealNumber</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='dealNumber' type='text' name='dealNumber' id='dealNumber' data-bv-notempty='true' data-bv-notempty-message='dealNumber 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>dealedDep</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='dealedDep' type='text' name='dealedDep' id='dealedDep' data-bv-notempty='true' data-bv-notempty-message='dealedDep 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>dealedEmail</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='dealedEmail' type='text' name='dealedEmail' id='dealedEmail' data-bv-notempty='true' data-bv-notempty-message='dealedEmail 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>dealedName</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='dealedName' type='text' name='dealedName' id='dealedName' data-bv-notempty='true' data-bv-notempty-message='dealedName 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>dealedNumber</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='dealedNumber' type='text' name='dealedNumber' id='dealedNumber' data-bv-notempty='true' data-bv-notempty-message='dealedNumber 不能为空'>
+				</div>
+			</div>
+			<div class='form-group'>
+				<label class='col-md-2 control-label'>rectifictId</label>
+				<div class='col-md-10'>
+					<input class='form-control' placeholder='rectifictId' type='text' name='rectifictId' id='rectifictId' data-bv-notempty='true' data-bv-notempty-message='rectifictId 不能为空'>
+				</div>
+			</div>
+
+
+			<div class="form-actions">
+				<div class="row" align="center">
+					<div class="col-md-12">
+					    <button class="btn btn-primary" onclick="location.href='seePersonList.html'">返回</button>
+						<button class="btn btn-primary" type="submit" onclick="add()">
+							<i class="fa fa-save"></i> 保存
+						</button>
+					</div>
+				</div>
+			</div>
+
+		</fieldset>
+	</form>
+</div>
+	<script type="text/javascript" src="../../../js/libs/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../../../js/jq.js"></script>
+	<script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+	<script type="text/javascript" src="../../../js/common.js"></script>
+	<script type="text/javascript" src="../../../layui/layui.js"></script>
+	<script type="text/javascript">
+		layui.use(['layer','laydate'], function(){
+		    var layer = layui.layer;
+		});
+		
+		function add() {
+			$('#form').bootstrapValidator();
+			var bootstrapValidator = $("#form").data('bootstrapValidator');
+			bootstrapValidator.validate();
+		    if(!bootstrapValidator.isValid()){
+			   return;
+		    }
+		    
+		    var formdata = $("#form").serializeObject();
+
+			$.ajax({
+				type : 'post',
+				url : '/seePersons',
+				contentType: "application/json; charset=utf-8",  
+				data : JSON.stringify(formdata),
+				success : function(data) {
+					layer.msg("添加成功", {shift: -1, time: 1000}, function(){
+                        location.href = "seePersonList.html";
+                    });
+				}
+			});
+		}
+		
+	</script>
+</body>
+</html>

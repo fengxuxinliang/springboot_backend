@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/boot_backend?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/boot_backend?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: root
+    password: spdb1234
     druid:
       initialSize: 5
       minIdle: 5
@@ -48,9 +48,10 @@ mybatis:
   type-aliases-package: com.zw.admin.server.model
   mapper-locations: classpath:/mybatis-mappers/*
   configuration:
-    mapUnderscoreToCamelCase: true
+    map-underscore-to-camel-case: true
+
 files:
-  path: ${file-path:d:/files}
+  path: ${file-path:C:\Users\fengx\IdeaProjects\boot-backend\src\main\resources\generate\files}
 logging:
   config: classpath:logback-admin.xml
 log:
